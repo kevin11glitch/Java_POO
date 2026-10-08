@@ -8,9 +8,10 @@ package com.mycompany.gerenciamentorequisitos;
  *
  * @author kevin
  */
-public class GerenciamentoRequisitos {
+public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         System.out.println("Hello World!");
     }
 }
