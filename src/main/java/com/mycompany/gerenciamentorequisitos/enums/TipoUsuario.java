@@ -9,8 +9,8 @@ package com.mycompany.gerenciamentorequisitos.enums;
  * @author kevin
  */
 public enum TipoUsuario {
-    COMUM,
-    GERENTE_DE_PROJETO,
-    ANALISTA,
-    DESENVOLVEDOR,
+    COMUM, //vizualizar projeto, requisitos e histórico
+    GERENTE_DE_PROJETO, //todas as funcionalidades
+    ANALISTA, //todas as funcionalidades menos criar e editar projetos, e gerenciar usuários
+    DESENVOLVEDOR, //todas as funcionalidades menos criar e editar projetos, e gerenciar usuários nem excluir requisitos
 }
