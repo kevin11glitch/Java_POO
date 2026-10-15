@@ -22,7 +22,7 @@ public class TelaRequisitos extends javax.swing.JFrame {
         //placeholder
         jTextFieldSearchBar.putClientProperty(
                 "JTextField.placeholderText",
-                "Pesquisar projetos..."
+                "Pesquisar requisitos..."
         );
         //botão limpar pesquisa
         jTextFieldSearchBar.putClientProperty(
@@ -156,6 +156,37 @@ public class TelaRequisitos extends javax.swing.JFrame {
                 }
             );
     }
+    
+    
+    private void carregarRequisitosExemplo() {
+
+        javax.swing.table.DefaultTableModel modelo =
+            (javax.swing.table.DefaultTableModel)
+                jTableRequisitos.getModel();
+
+        modelo.addRow(new Object[]{
+            "RF001", "Login", "Funcional", "Concluído"
+        });
+
+        modelo.addRow(new Object[]{
+            "RF002", "Cadastro", "Funcional", "Em andamento"
+        });
+
+        modelo.addRow(new Object[]{
+            "RNF001", "Segurança", "Não funcional", "Pendente"
+        });
+    }
+    
+    private void configurarBoxSelecao(){
+        jComboBoxProjetos.putClientProperty(
+                "FlatLaf.style",
+                "arc: 18"
+        );
+        //altura barra
+        jComboBoxProjetos.setPreferredSize(
+                new java.awt.Dimension(80, 30)
+        );
+    }
 
     
     public TelaRequisitos() {
@@ -163,6 +194,8 @@ public class TelaRequisitos extends javax.swing.JFrame {
         configurarBarraPesquisa();
         configurarTabelaRequisitos();
         configurarPesquisaRequisitos();
+        carregarRequisitosExemplo();
+        configurarBoxSelecao();
     }
 
     /**
@@ -188,6 +221,7 @@ public class TelaRequisitos extends javax.swing.JFrame {
         jButtonNovo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableRequisitos = new javax.swing.JTable();
+        jComboBoxProjetos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(780, 480));
@@ -270,6 +304,9 @@ public class TelaRequisitos extends javax.swing.JFrame {
             jTableRequisitos.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        jComboBoxProjetos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Projeto X", "Projeto Y", "Projeto Z" }));
+        jComboBoxProjetos.addActionListener(this::jComboBoxProjetosActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -277,18 +314,18 @@ public class TelaRequisitos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonNovo)))
-                        .addGap(94, 94, 94))))
+                                .addComponent(jLabel2)
+                                .addGap(30, 30, 30)
+                                .addComponent(jComboBoxProjetos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonNovo)))
+                .addGap(94, 94, 94))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
@@ -302,7 +339,9 @@ public class TelaRequisitos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jComboBoxProjetos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,29 +393,19 @@ public class TelaRequisitos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSearchBarActionPerformed
 
+    private void jComboBoxProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProjetosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxProjetosActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        com.formdev.flatlaf.FlatLightLaf.setup();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaRequisitos().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+        new TelaRequisitos().setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -387,6 +416,7 @@ public class TelaRequisitos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRequisitos;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonUsuarios;
+    private javax.swing.JComboBox<String> jComboBoxProjetos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

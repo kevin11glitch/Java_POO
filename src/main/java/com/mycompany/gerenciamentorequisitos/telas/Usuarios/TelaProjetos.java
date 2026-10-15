@@ -301,11 +301,11 @@ private void configurarFiltroProjetos() {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        FlatLightLaf.setup();
+        com.formdev.flatlaf.FlatLightLaf.setup();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaProjetos().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaRequisitos().setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
