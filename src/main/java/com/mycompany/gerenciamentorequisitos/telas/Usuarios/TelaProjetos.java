@@ -4,6 +4,13 @@
  */
 package com.mycompany.gerenciamentorequisitos.telas.Usuarios;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import java.util.regex.Pattern;
 /**
  *
  * @author kevin
@@ -15,16 +22,96 @@ public class TelaProjetos extends javax.swing.JFrame {
     /**
      * Creates new form TelaProjetos
      */
+    
+private void configurarFiltroProjetos() {
+
+    DefaultTableModel modelo =
+        (DefaultTableModel) jTableProjetos.getModel();
+
+    TableRowSorter<DefaultTableModel> filtro =
+        new TableRowSorter<>(modelo);
+
+    jTableProjetos.setRowSorter(filtro);
+
+    jTextFieldSearchBar.getDocument().addDocumentListener(
+        new DocumentListener() {
+
+            private void pesquisar() {
+                String texto =
+                    jTextFieldSearchBar.getText().trim();
+
+                if (texto.isEmpty()) {
+                    filtro.setRowFilter(null);
+                } else {
+                    filtro.setRowFilter(
+                        RowFilter.regexFilter(
+                            "(?iu)" + Pattern.quote(texto),
+                            0
+                        )
+                    );
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                pesquisar();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                pesquisar();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                pesquisar();
+            }
+        }
+    );
+}
+
+    private void configurarBarraPesquisa(){
+        jTextFieldSearchBar.setText("");
+        //placeholder
+        jTextFieldSearchBar.putClientProperty(
+                "JTextField.placeholderText",
+                "Pesquisar projetos..."
+        );
+        //botão limpar pesquisa
+        jTextFieldSearchBar.putClientProperty(
+                "JTextField.showClearButton", 
+                true
+        );
+        //bordas arredondadas
+        jTextFieldSearchBar.putClientProperty(
+                "FlatLaf.style",
+                "arc: 18"
+        );
+        //altura barra
+        jTextFieldSearchBar.setPreferredSize(
+                new java.awt.Dimension(250, 30)
+        );
+        //icone
+        
+        FlatSVGIcon iconeLupa = new FlatSVGIcon(
+            "icons/lupa.svg",
+            18,
+            18
+        );
+
+        jTextFieldSearchBar.putClientProperty(
+            "JTextField.leadingIcon",
+            iconeLupa
+        );
+
+        
+        
+    };
+    
     public TelaProjetos() {
         initComponents();
-        jTextFieldSearchBar.setText("");
-        jTextFieldSearchBar.putClientProperty("JTextField.placeholderText", "Pesquisar projetos...");
-        jTextFieldSearchBar.putClientProperty("JTextField.showClearButton", true);
-        jTextFieldSearchBar.putClientProperty("JTextField.style", "arc: 15");
-        java.net.URL iconURL = getClass().getResource("./icons/lupa.png");
-        if (iconURL != null) {
-            jTextFieldSearchBar.putClientProperty("JTextField.leadingIcon", new javax.swing.ImageIcon(iconURL));
-        }
+        configurarBarraPesquisa();
+        configurarFiltroProjetos();
     }
 
     /**
