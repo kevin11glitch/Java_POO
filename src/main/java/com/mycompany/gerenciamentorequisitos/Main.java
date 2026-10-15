@@ -1,4 +1,5 @@
 package com.mycompany.gerenciamentorequisitos;
+import com.mycompany.gerenciamentorequisitos.telas.Usuarios.TelaProjetos;
 
 /**
  * Classe principal do sistema de gerenciamento de requisitos.
@@ -8,6 +9,7 @@ package com.mycompany.gerenciamentorequisitos;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        TelaProjetos tela = new TelaProjetos();
+        tela.setVisible(true);
     }
 }

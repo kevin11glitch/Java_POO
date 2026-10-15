@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.gerenciamentorequisitos.telas.Usuarios;
-
+import com.formdev.flatlaf.FlatLightLaf;
 /**
  *
  * @author kevin
@@ -17,6 +17,14 @@ public class TelaProjetos extends javax.swing.JFrame {
      */
     public TelaProjetos() {
         initComponents();
+        jTextFieldSearchBar.setText("");
+        jTextFieldSearchBar.putClientProperty("JTextField.placeholderText", "Pesquisar projetos...");
+        jTextFieldSearchBar.putClientProperty("JTextField.showClearButton", true);
+        jTextFieldSearchBar.putClientProperty("JTextField.style", "arc: 15");
+        java.net.URL iconURL = getClass().getResource("./icons/lupa.png");
+        if (iconURL != null) {
+            jTextFieldSearchBar.putClientProperty("JTextField.leadingIcon", new javax.swing.ImageIcon(iconURL));
+        }
     }
 
     /**
@@ -28,48 +36,206 @@ public class TelaProjetos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanelMenu = new javax.swing.JPanel();
+        jButtonRequisitos = new javax.swing.JButton();
+        jButtonInicio = new javax.swing.JButton();
+        jButtonProjetos = new javax.swing.JButton();
+        jButtonUsuarios = new javax.swing.JButton();
+        jButtonHistorico = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButtonNovo = new javax.swing.JButton();
+        jTextFieldSearchBar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableProjetos = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 786));
+        setMaximumSize(new java.awt.Dimension(780, 480));
+        setMinimumSize(new java.awt.Dimension(780, 480));
+        setResizable(false);
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(780, 480));
+        jPanel1.setMinimumSize(new java.awt.Dimension(780, 480));
+        jPanel1.setPreferredSize(new java.awt.Dimension(780, 480));
+
+        jPanelMenu.setMaximumSize(new java.awt.Dimension(2147483647, 480));
+        jPanelMenu.setMinimumSize(new java.awt.Dimension(120, 480));
+        jPanelMenu.setPreferredSize(new java.awt.Dimension(120, 480));
+        jPanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonRequisitos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonRequisitos.setText("Requisitos");
+        jButtonRequisitos.addActionListener(this::jButtonRequisitosActionPerformed);
+        jPanelMenu.add(jButtonRequisitos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 100, -1));
+
+        jButtonInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonInicio.setText("Inicio");
+        jButtonInicio.addActionListener(this::jButtonInicioActionPerformed);
+        jPanelMenu.add(jButtonInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, -1));
+
+        jButtonProjetos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonProjetos.setText("Projetos");
+        jButtonProjetos.addActionListener(this::jButtonProjetosActionPerformed);
+        jPanelMenu.add(jButtonProjetos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, -1));
+
+        jButtonUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonUsuarios.setText("Usuários");
+        jPanelMenu.add(jButtonUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, -1));
+
+        jButtonHistorico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonHistorico.setText("Histórico");
+        jPanelMenu.add(jButtonHistorico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+
+        jButtonSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(this::jButtonSairActionPerformed);
+        jPanelMenu.add(jButtonSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 100, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("GERENCIAMENTO DE REQUISITOS");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Projetos");
+
+        jButtonNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonNovo.setText("+ Novo");
+        jButtonNovo.addActionListener(this::jButtonNovoActionPerformed);
+
+        jTextFieldSearchBar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextFieldSearchBar.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jTableProjetos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTableProjetos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"{Projeto X}", "{StatusProjeto}", null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Projeto", "Status", "Ações"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTableProjetos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(jTableProjetos);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(150, 150, 150)
+                                .addComponent(jButtonNovo))
+                            .addComponent(jScrollPane1))
+                        .addGap(94, 94, 94))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(jPanelMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+
+    private void jButtonRequisitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRequisitosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRequisitosActionPerformed
+
+    private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInicioActionPerformed
+
+    private void jButtonProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProjetosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonProjetosActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNovoActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        FlatLightLaf.setup();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new TelaProjetos().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonHistorico;
+    private javax.swing.JButton jButtonInicio;
+    private javax.swing.JButton jButtonNovo;
+    private javax.swing.JButton jButtonProjetos;
+    private javax.swing.JButton jButtonRequisitos;
+    private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonUsuarios;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelMenu;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableProjetos;
+    private javax.swing.JTextField jTextFieldSearchBar;
     // End of variables declaration//GEN-END:variables
 }
