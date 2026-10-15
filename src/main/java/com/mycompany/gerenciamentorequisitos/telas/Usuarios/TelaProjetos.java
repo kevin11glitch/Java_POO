@@ -124,6 +124,12 @@ private void configurarFiltroProjetos() {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButtonNovo = new javax.swing.JButton();
+        jTextFieldSearchBar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableProjetos = new javax.swing.JTable();
         jPanelMenu = new javax.swing.JPanel();
         jButtonRequisitos = new javax.swing.JButton();
         jButtonInicio = new javax.swing.JButton();
@@ -131,21 +137,49 @@ private void configurarFiltroProjetos() {
         jButtonUsuarios = new javax.swing.JButton();
         jButtonHistorico = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButtonNovo = new javax.swing.JButton();
-        jTextFieldSearchBar = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableProjetos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(780, 480));
         setMinimumSize(new java.awt.Dimension(780, 480));
         setResizable(false);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(780, 480));
         jPanel1.setMinimumSize(new java.awt.Dimension(780, 480));
         jPanel1.setPreferredSize(new java.awt.Dimension(780, 480));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("GERENCIAMENTO DE REQUISITOS");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Projetos");
+
+        jButtonNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonNovo.setText("+ Novo");
+        jButtonNovo.addActionListener(this::jButtonNovoActionPerformed);
+
+        jTextFieldSearchBar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextFieldSearchBar.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jTableProjetos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTableProjetos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"{Projeto X}", "{StatusProjeto}", null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Projeto", "Status", "Ações"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTableProjetos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(jTableProjetos);
 
         jPanelMenu.setMaximumSize(new java.awt.Dimension(2147483647, 480));
         jPanelMenu.setMinimumSize(new java.awt.Dimension(120, 480));
@@ -180,41 +214,6 @@ private void configurarFiltroProjetos() {
         jButtonSair.addActionListener(this::jButtonSairActionPerformed);
         jPanelMenu.add(jButtonSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 100, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("GERENCIAMENTO DE REQUISITOS");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Projetos");
-
-        jButtonNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButtonNovo.setText("+ Novo");
-        jButtonNovo.addActionListener(this::jButtonNovoActionPerformed);
-
-        jTextFieldSearchBar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextFieldSearchBar.setPreferredSize(new java.awt.Dimension(200, 22));
-
-        jTableProjetos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTableProjetos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"{Projeto X}", "{StatusProjeto}", null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Projeto", "Status", "Ações"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTableProjetos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTableProjetos);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -222,18 +221,16 @@ private void configurarFiltroProjetos() {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(150, 150, 150)
-                                .addComponent(jButtonNovo))
-                            .addComponent(jScrollPane1))
-                        .addGap(94, 94, 94))))
+                        .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonNovo)))
+                .addGap(94, 94, 94))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
@@ -242,20 +239,22 @@ private void configurarFiltroProjetos() {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(47, Short.MAX_VALUE))
-                    .addComponent(jPanelMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,6 +277,10 @@ private void configurarFiltroProjetos() {
     
     
 
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNovoActionPerformed
+
     private void jButtonRequisitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRequisitosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRequisitosActionPerformed
@@ -293,10 +296,6 @@ private void configurarFiltroProjetos() {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSairActionPerformed
-
-    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonNovoActionPerformed
 
     /**
      * @param args the command line arguments
