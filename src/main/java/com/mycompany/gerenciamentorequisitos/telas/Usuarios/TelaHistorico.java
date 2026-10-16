@@ -29,33 +29,124 @@ public class TelaHistorico extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanelMenu = new javax.swing.JPanel();
+        jButtonRequisitos = new javax.swing.JButton();
+        jButtonInicio = new javax.swing.JButton();
+        jButtonProjetos = new javax.swing.JButton();
+        jButtonUsuarios = new javax.swing.JButton();
+        jButtonHistorico = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableHistórico = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(780, 480));
         setMinimumSize(new java.awt.Dimension(780, 480));
-        setPreferredSize(new java.awt.Dimension(780, 480));
         setResizable(false);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(780, 480));
         jPanel1.setMinimumSize(new java.awt.Dimension(780, 480));
         jPanel1.setPreferredSize(new java.awt.Dimension(780, 480));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("GERENCIAMENTO DE REQUISITOS");
+
+        jPanelMenu.setMaximumSize(new java.awt.Dimension(2147483647, 480));
+        jPanelMenu.setMinimumSize(new java.awt.Dimension(120, 480));
+        jPanelMenu.setPreferredSize(new java.awt.Dimension(120, 480));
+        jPanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonRequisitos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonRequisitos.setText("Requisitos");
+        jButtonRequisitos.addActionListener(this::jButtonRequisitosActionPerformed);
+        jPanelMenu.add(jButtonRequisitos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 100, -1));
+
+        jButtonInicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonInicio.setText("Inicio");
+        jButtonInicio.addActionListener(this::jButtonInicioActionPerformed);
+        jPanelMenu.add(jButtonInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, -1));
+
+        jButtonProjetos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonProjetos.setText("Projetos");
+        jButtonProjetos.addActionListener(this::jButtonProjetosActionPerformed);
+        jPanelMenu.add(jButtonProjetos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, -1));
+
+        jButtonUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonUsuarios.setText("Usuários");
+        jPanelMenu.add(jButtonUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, -1));
+
+        jButtonHistorico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonHistorico.setText("Histórico");
+        jPanelMenu.add(jButtonHistorico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+
+        jButtonSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(this::jButtonSairActionPerformed);
+        jPanelMenu.add(jButtonSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 100, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Histórico");
+
+        jTableHistórico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Requisito", "Usuário", "Data / Hora", "Descrição"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableHistórico);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 93, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -64,6 +155,22 @@ public class TelaHistorico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonRequisitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRequisitosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRequisitosActionPerformed
+
+    private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInicioActionPerformed
+
+    private void jButtonProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProjetosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonProjetosActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,6 +198,17 @@ public class TelaHistorico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonHistorico;
+    private javax.swing.JButton jButtonInicio;
+    private javax.swing.JButton jButtonProjetos;
+    private javax.swing.JButton jButtonRequisitos;
+    private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonUsuarios;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelMenu;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableHistórico;
     // End of variables declaration//GEN-END:variables
 }

@@ -69,6 +69,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jButtonEntrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonEntrar.setText("Entrar");
+        jButtonEntrar.addActionListener(this::jButtonEntrarActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,6 +118,11 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jTextFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSenhaActionPerformed
+
+    private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**
      * @param args the command line arguments

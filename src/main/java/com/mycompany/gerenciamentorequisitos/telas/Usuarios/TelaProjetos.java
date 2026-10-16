@@ -11,6 +11,17 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.regex.Pattern;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Insets;
+import javax.swing.AbstractCellEditor;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author kevin
@@ -108,10 +119,214 @@ private void configurarFiltroProjetos() {
         
     };
     
+
+    private void configurarColunaAcoes() {
+
+        // Altura das linhas
+        jTableProjetos.setRowHeight(36);
+
+        // Configuração da coluna Ações
+        TableColumn coluna =
+            jTableProjetos.getColumnModel().getColumn(2);
+
+        coluna.setPreferredWidth(150);
+
+        coluna.setCellRenderer(new RenderizadorAcoes());
+        coluna.setCellEditor(new EditorAcoes());
+    }
+
+    // Cria um botão reutilizável
+    private JButton criarBotaoAcao(String texto) {
+
+        JButton botao = new JButton();
+
+        botao.setFocusable(false);
+        botao.setToolTipText(texto);
+
+        botao.setMargin(new Insets(3, 5, 3, 5));
+
+        String caminhoIcone = switch (texto) {
+            case "Ver" -> "icons/visualizar.svg";
+            case "Editar" -> "icons/editar.svg";
+            case "Excluir" -> "icons/excluir.svg";
+            default -> null;
+        };
+
+        if (caminhoIcone != null) {
+            botao.setIcon(
+                new FlatSVGIcon(caminhoIcone, 18, 18)
+            );
+        }
+
+        return botao;
+    }
+
+
+    // Organiza os três botões
+    private JPanel criarPainelAcoes(
+            JButton visualizar,
+            JButton editar,
+            JButton excluir) {
+
+        JPanel painel = new JPanel(
+            new FlowLayout(FlowLayout.CENTER, 4, 3)
+        );
+
+        painel.add(visualizar);
+        painel.add(editar);
+        painel.add(excluir);
+
+        return painel;
+    }
+
+    //aparência dos botões            
+    private class RenderizadorAcoes
+            implements TableCellRenderer {
+
+        private final JPanel painel = criarPainelAcoes(
+            criarBotaoAcao("Ver"),
+            criarBotaoAcao("Editar"),
+            criarBotaoAcao("Excluir")
+        );
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable tabela,
+                Object valor,
+                boolean selecionado,
+                boolean foco,
+                int linha,
+                int coluna) {
+
+            painel.setBackground(
+                selecionado
+                    ? tabela.getSelectionBackground()
+                    : tabela.getBackground()
+            );
+
+            // Verifica se a linha está vazia
+            if (tabela.getValueAt(linha, 0) == null) {
+
+                JPanel vazio = new JPanel();
+
+                vazio.setBackground(
+                    painel.getBackground()
+                );
+
+                return vazio;
+            }
+
+            return painel;
+        }
+    }
+
+
+    //cliques nos botões
+    private class EditorAcoes extends AbstractCellEditor
+            implements TableCellEditor {
+
+        private Object valorOriginal;
+
+        @Override
+        public Component getTableCellEditorComponent(
+                JTable tabela,
+                Object valor,
+                boolean selecionado,
+                int linha,
+                int coluna) {
+
+            valorOriginal = valor;
+
+            JButton visualizar = criarBotaoAcao("Ver");
+            JButton editar = criarBotaoAcao("Editar");
+            JButton excluir = criarBotaoAcao("Excluir");
+
+            visualizar.addActionListener(e ->
+                executarAcao(tabela, linha, "visualizar")
+            );
+
+            editar.addActionListener(e ->
+                executarAcao(tabela, linha, "editar")
+            );
+
+            excluir.addActionListener(e ->
+                executarAcao(tabela, linha, "excluir")
+            );
+
+            JPanel painel = criarPainelAcoes(
+                visualizar, editar, excluir
+            );
+
+            painel.setBackground(tabela.getBackground());
+
+            return painel;
+        }
+
+        private void executarAcao(
+                JTable tabela, int linha, String acao) {
+
+            // Converte a linha visual para a linha do modelo
+            int indiceModelo =
+                tabela.convertRowIndexToModel(linha);
+
+            DefaultTableModel modelo =
+                (DefaultTableModel) tabela.getModel();
+
+            Object valorNome =
+                modelo.getValueAt(indiceModelo, 0);
+
+            fireEditingStopped();
+
+            if (valorNome == null) {
+                return;
+            }
+
+            String nomeProjeto = valorNome.toString();
+
+            switch (acao) {
+
+                case "visualizar":
+                    JOptionPane.showMessageDialog(
+                        TelaProjetos.this,
+                        "Visualizar: " + nomeProjeto
+                    );
+                    break;
+
+                case "editar":
+                    JOptionPane.showMessageDialog(
+                        TelaProjetos.this,
+                        "Editar: " + nomeProjeto
+                    );
+                    break;
+
+                case "excluir":
+                    int resposta = JOptionPane.showConfirmDialog(
+                        TelaProjetos.this,
+                        "Deseja excluir o projeto " +
+                        nomeProjeto + "?",
+                        "Confirmar exclusão",
+                        JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        modelo.removeRow(indiceModelo);
+                    }
+                    break;
+            }
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return valorOriginal;
+        }
+    }
+
+    
     public TelaProjetos() {
         initComponents();
         configurarBarraPesquisa();
         configurarFiltroProjetos();
+        configurarColunaAcoes();
     }
 
     /**
